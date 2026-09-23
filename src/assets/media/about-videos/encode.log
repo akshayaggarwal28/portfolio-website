@@ -1,0 +1,30 @@
+== LOOPS (short, muted, 720p) ==
+[loop 1] raunak_v1.mov
+[loop 2] ekam_s2.mov
+[loop 3] chanakya.mov
+[loop 4] azhar.mov
+[loop 5] kevin.mp4
+[loop 6] 50 50 tvc.mp4
+LOOPS_DONE
+== FULL (web-optimized, 720p, faststart) ==
+[full 1] raunak_v1.mov
+[full 2] ekam_s2.mov
+[full 3] chanakya.mov
+[full 4] azhar.mov
+[full 5] kevin.mp4
+[full 6] 50 50 tvc.mp4
+FULL_DONE
+== SIZES ==
+20M /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/full-1.mp4
+16M /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/full-2.mp4
+10M /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/full-3.mp4
+24M /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/full-4.mp4
+14M /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/full-5.mp4
+2.9M /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/full-6.mp4
+513K /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/loop-1.mp4
+1.2M /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/loop-2.mp4
+127K /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/loop-3.mp4
+520K /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/loop-4.mp4
+501K /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/loop-5.mp4
+470K /Users/akshay/Desktop/website/website/akshay-portfolio/src/assets/media/about-videos/loop-6.mp4
+ALL_DONE
