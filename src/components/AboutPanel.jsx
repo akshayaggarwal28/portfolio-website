@@ -36,6 +36,13 @@ export default function AboutPanel() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.15, ease: 'easeOut' }}
     >
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
+        <defs>
+          <filter id="sharpen">
+            <feConvolveMatrix order="3" kernelMatrix="0 -1 0  -1 5 -1  0 -1 0" />
+          </filter>
+        </defs>
+      </svg>
       <Left>
         <Player>
           <LoopVideo ref={videoRef} src={activeItem.inlineVideo} />
@@ -134,6 +141,7 @@ const Player = styled.div`
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: url(#sharpen) contrast(1.08);
   }
 
   @media (max-width: 900px) {
