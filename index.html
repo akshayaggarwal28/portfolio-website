@@ -1716,13 +1716,37 @@ Bollywood Casting Director`}],skills:[{key:"stage-screen",label:"Stage & Screen"
 `;Ha.createRoot(document.getElementById("root")).render(h.jsx(Pe.StrictMode,{children:h.jsx(KE,{})}));</script>
   </head>
   <body>
-        <svg width="0" height="0" style="position:absolute"><defs><filter id="video-sharpen"><feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0"/></filter></defs></svg>
-    <script>
-      new MutationObserver(function(_, obs) {
-        var v = document.querySelector('video[src*="intro_video"]');
-        if (v) { v.style.filter = 'url(#video-sharpen) contrast(1.08)'; obs.disconnect(); }
-      }).observe(document.getElementById('root'), { childList: true, subtree: true });
-    </script>
     <div id="root"></div>
+    <script>
+  (function() {
+    var YT_SRC = 'https://www.youtube.com/embed/NtyjonKDVzE?autoplay=1&mute=1&loop=1&playlist=NtyjonKDVzE&controls=0&rel=0&enablejsapi=1';
+    function replaceIntroVideo() {
+      var v = document.querySelector('video[src*="intro_video"]');
+      if (!v) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = YT_SRC;
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      iframe.title = 'Introduction';
+      iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+      v.parentNode.replaceChild(iframe, v);
+      // Rewire the mute button to use postMessage
+      var btn = document.querySelector('[aria-label="Unmute intro"], [aria-label="Mute intro"]');
+      if (btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopImmediatePropagation();
+          var muted = btn.getAttribute('aria-label') === 'Unmute intro';
+          iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:muted?'unMute':'mute',args:''}), '*');
+        }, true);
+      }
+    }
+    new MutationObserver(function(_, obs) {
+      if (document.querySelector('video[src*="intro_video"]')) {
+        replaceIntroVideo();
+        obs.disconnect();
+      }
+    }).observe(document.getElementById('root'), { childList: true, subtree: true });
+  })();
+</script>
   </body>
 </html>
