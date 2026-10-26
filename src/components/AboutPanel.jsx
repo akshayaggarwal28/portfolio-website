@@ -11,21 +11,21 @@ import LoopVideo from './LoopVideo';
  * an L-shape — a 2×2 feature clip with the remaining clips wrapping its right
  * and bottom edges. Each tile autoplays a short, muted loop (a showreel wall).
  */
+const YT_EMBED = 'https://www.youtube.com/embed/NtyjonKDVzE?autoplay=1&mute=1&loop=1&playlist=NtyjonKDVzE&controls=0&rel=0&enablejsapi=1';
+
 export default function AboutPanel() {
   const { activeItem } = useCompass();
-  const videoRef = useRef(null);
+  const iframeRef = useRef(null);
   const [muted, setMuted] = useState(true);
 
-  // Click-to-unmute: the intro monologue doubles as the voice/presence sample.
   const toggleSound = () => {
-    const v = videoRef.current;
-    if (!v) return;
+    const iframe = iframeRef.current;
+    if (!iframe) return;
     const next = !muted;
-    v.muted = next;
-    if (!next) {
-      const p = v.play();
-      if (p && p.catch) p.catch(() => {});
-    }
+    iframe.contentWindow.postMessage(
+      JSON.stringify({ event: 'command', func: next ? 'mute' : 'unMute', args: '' }),
+      '*'
+    );
     setMuted(next);
   };
 
@@ -36,16 +36,15 @@ export default function AboutPanel() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.15, ease: 'easeOut' }}
     >
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
-        <defs>
-          <filter id="sharpen">
-            <feConvolveMatrix order="3" kernelMatrix="0 -1 0  -1 5 -1  0 -1 0" />
-          </filter>
-        </defs>
-      </svg>
       <Left>
         <Player>
-          <LoopVideo ref={videoRef} src={activeItem.inlineVideo} />
+          <iframe
+            ref={iframeRef}
+            src={YT_EMBED}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title="Introduction"
+          />
 
           {/* Signature "hear him" toggle — the only unmutable clip on the site. */}
           <SoundToggle onClick={toggleSound} $on={!muted} aria-label={muted ? 'Unmute intro' : 'Mute intro'}>
@@ -136,12 +135,11 @@ const Player = styled.div`
     0 0 0 1px rgba(0, 0, 0, 0.4),
     0 0 60px rgba(201, 169, 97, 0.06);
 
-  video {
+  iframe {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    border: none;
     display: block;
-    filter: url(#sharpen) contrast(1.08);
   }
 
   @media (max-width: 900px) {
